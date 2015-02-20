@@ -11,6 +11,7 @@
   function FreeController(FreeFactory, MapFactory, $scope, $rootScope, $stateParams, $q, $timeout, $http){
     var vm = this;
     vm.free = [];
+    vm.test = 'test'
 
     vm.select = function(obj) {
       var single = MapFactory.createMarker(obj,1);

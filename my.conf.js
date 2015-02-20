@@ -14,11 +14,7 @@ module.exports = function(config) {
 
 
     // list of files / patterns to load in the browser
-    files: [
-      'client/components/angular/angular.js',
-      'client/components/angular-ui-router/release/angular-ui-router.js',
-      'client/app/**/*.js'
-    ],
+
 
 
     // list of files to exclude
