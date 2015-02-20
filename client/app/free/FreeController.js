@@ -6,9 +6,9 @@
   .module('app.free')
   .controller('FreeController', FreeController);
 
-  FreeController.$inject = ['FreeFactory', 'MapFactory', '$scope', '$rootScope', '$stateParams', '$q', '$timeout', '$http'];
+  FreeController.$inject = ['FreeFactory', 'MapFactory', '$scope', '$rootScope', '$stateParams', '$q', '$timeout', '$interval', '$http'];
 
-  function FreeController(FreeFactory, MapFactory, $scope, $rootScope, $stateParams, $q, $timeout, $http){
+  function FreeController(FreeFactory, MapFactory, $scope, $rootScope, $stateParams, $q, $timeout, $interval, $http){
     var vm = this;
     vm.free = [];
     vm.test = 'test'
@@ -18,30 +18,28 @@
       $rootScope.$broadcast('single', single);
     }
 
-    vm.deselect = function() {
-      $rootScope.$broadcast('showAll');
-    }
+    vm.playSequence = function(time) {
+      // goes through sequenceArray rows and invoke cycleColumns simultaneously
+      // for each row...
+      console.log(vm.seqArray);
+      for (var i = 0; i < vm.seqArray.length; i++) {
+        FreeFactory.cycleColumns(vm.seqArray[i], function(array, object, index) {
+          FreeFactory.timeout(object, index, time, function() {
+            console.log(object);
+            if (object.hasOwnProperty('sound')) {
+              FreeFactory.play();
+            }
+          })
+        })
 
+      }
+    }   
 
-    // creates list and markers
     function init() {
-      FreeFactory.getFree('places',function(places){
-        angular.forEach(places, function(place,index) {
-          vm.free.push(place); 
-          MapFactory.map.markers.push(MapFactory.createMarker(place, index));        
-        })
-        FreeFactory.getFree('events', function(events) {
-          angular.forEach(events, function(event,index) {
-            vm.free.push(event);
-            MapFactory.map.markers.push(MapFactory.createMarker(event, index));              
-          })          
-          console.log('done');
-          $rootScope.$broadcast('markers-complete', MapFactory.map.markers);
-        })
-      })
+      FreeFactory.createSeqArray(vm.seqArray, 3, 3);
     }
 
-    init(); 
+    init();
   }
 })();
     
