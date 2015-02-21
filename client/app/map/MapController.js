@@ -11,7 +11,6 @@
     $scope.map = { center: { latitude: 37.774929, longitude: -122.419416 }, zoom: 13, bounds: {}    };
     var vm = this;
     vm.markers = [];
-
     $scope.windowOptions = {
         visible: false
     };   
@@ -20,10 +19,11 @@
       vm.markers = [];
       $timeout(function() {
         vm.markers.push(args);
-      },100)
+      },200)
     })
 
     $scope.$on('showAll', function(event, args) {
+      vm.markers = [];
       vm.markers = vm.temp;
     })
 
