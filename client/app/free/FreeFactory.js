@@ -7,30 +7,10 @@
   function FreeFactory($http, $q, $timeout){
 
     var services = {
-      play: play,
-      createSeqArray: createSeqArray,
-      cycleColumns: cycleColumns,
-      findUnit: findUnit,
-      timeout: timeout
+      getFree: getFree
     }
 
-    ion.sound({
-      sounds: [
-        {
-          name: "test",
-          volume: 0.5,
-          preload: false
-        }
-      ],
-      volume: 0.5,
-      path: "sounds/",
-      preload: true
-    });
-
-    function play () {
-      console.log('playing test');
-      ion.sound.play("test");
-    }
+    return services;
 
     function getFree(type, cb) {
       console.log('getting data...');
@@ -41,9 +21,5 @@
         console.log('Error! ', status);
       })
     }    
-
   }
 })();
-
-
-

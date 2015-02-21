@@ -3,7 +3,7 @@
 <head>
   <base href="/">
   <meta name="viewport" content="width=device-width" />
-  <title>sequence</title>
+  <title>freehunt</title>
   <link rel="stylesheet" type="text/css" href="/components/bootstrap/dist/css/bootstrap.css">
   <link rel="stylesheet" type="text/css" href="/style/style.css">
   <link rel="stylesheet" type="text/css" href="/components/animate.css/animate.css">
@@ -16,19 +16,23 @@
       </div>
   </div>
     <div class="row special">
-      <div class="col-xs-12 col-lg-12">
+      <div class="col-lg-6">
+        <div ui-view="map" class="pane animated fadeInLeft"></div>
+      </div>
+      <div class="col-xs-12 col-lg-6">
         <div ui-view="list" class="pane animated fadeInRight"></div>
       </div>
     </div>  
   </div>
 
-
-  <script src="/components/angular/angular.js"></script>
+  <script src="/components/underscore/underscore-min.js"></script>
+  <script src="/components/angular/angular.min.js"></script>
   <script src='//maps.googleapis.com/maps/api/js?sensor=false'></script>
   <script src="/components/angular-google-maps/dist/angular-google-maps.min.js"></script>
   <script src="/components/lodash/dist/lodash.min.js"></script>
   <script src="/components/angular-ui-router/release/angular-ui-router.min.js"></script>
   <script src="/components/ngFx/dist/ngFx.min.js"></script>
+  <script src="/app/app.module.js"></script>
   <script src="/app/core/core.module.js"></script>
   <script src="/app/core/config.js"></script>
   <script src="/app/free/free.module.js"></script>
@@ -37,7 +41,6 @@
   <script src="/app/map/map.module.js"></script>
   <script src="/app/map/MapFactory.js"></script>
   <script src="/app/map/MapController.js"></script>
-  <script src="/app/app.module.js"></script>
 
 
 

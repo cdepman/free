@@ -14,7 +14,7 @@
       createMarker: createMarker,
       map: map
     }
-    
+
     return services;
 
     function createMarker(obj, id) {
@@ -33,6 +33,7 @@
         console.log('clicked');
         marker.show = true;
       }
+
       return marker;
     }
   }

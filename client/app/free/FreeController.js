@@ -6,9 +6,9 @@
   .module('app.free')
   .controller('FreeController', FreeController);
 
-  FreeController.$inject = ['FreeFactory', 'MapFactory', '$scope', '$rootScope', '$stateParams', '$q', '$timeout', '$interval', '$http'];
+  FreeController.$inject = ['FreeFactory', 'MapFactory', '$scope', '$rootScope', '$stateParams', '$q', '$timeout', '$http'];
 
-  function FreeController(FreeFactory, MapFactory, $scope, $rootScope, $stateParams, $q, $timeout, $interval, $http){
+  function FreeController(FreeFactory, MapFactory, $scope, $rootScope, $stateParams, $q, $timeout, $http){
     var vm = this;
     vm.free = [];
 
@@ -20,6 +20,7 @@
     vm.deselect = function() {
       $rootScope.$broadcast('showAll');
     }
+
 
     // creates list and markers
     function init() {
