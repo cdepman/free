@@ -6,47 +6,35 @@
 
   function MapFactory($http, $q, $timeout){
     var places, events, things;
+    var map = {
+      markers: []
+    };
 
     var services = {
-      creatMarker: creatMarker
+      createMarker: createMarker,
+      map: map
     }
 
     return services;
 
-    function creatMarker(obj, id) {
+    function createMarker(obj, id) {
       var marker = {
         latitude: obj.location.lat,
         longitude: obj.location.lng,
         id: id,
-        options: {
-          animation: 'DROP',
-          draggable: true
-        },
-        events: {
-          'click': function(Marker, eventName, model, args) {
-            console.log(Marker);
-          }
-        }
-
+        show: false,
+        title: obj.name,
+        type: obj.type,
+        link: obj.href,
+        draggable: true
       }
 
-      // marker.options = {
-      //   draggable: true,
-      //   labelContent: obj,
-      //   labelAnchor: '100 0',
-      //   labelClass: 'marker-labels',
-      //   animation: 'DROP'
-      // };
+      marker.getWindow = function () {
+        console.log('clicked');
+        marker.show = true;
+      }
+
       return marker;
-    }
-
-    vm.events = {
-      'click': function(Marker, eventName, model, args) {
-        console.log(model);
-      }
     }
   }
 })();
-
-
-

@@ -11,48 +11,35 @@
   function FreeController(FreeFactory, MapFactory, $scope, $rootScope, $stateParams, $q, $timeout, $http){
     var vm = this;
     vm.free = [];
-    vm.markers = [];
 
-    vm.events = {
-      'click': function(Marker, eventName, model, args) {
-        console.log(Marker);
-      }
+    vm.select = function(obj) {
+      var single = MapFactory.createMarker(obj,1);
+      $rootScope.$broadcast('single', single);
     }
 
-    vm.markers.options = {
-      draggable: true,
-      animation: 'DROP'
+    vm.deselect = function() {
+      $rootScope.$broadcast('showAll');
     }
 
-    $scope.map = { center: { latitude: 37.774929, longitude: -122.419416 }, zoom: 13, bounds: {} };
 
+    // creates list and markers
     function init() {
       FreeFactory.getFree('places',function(places){
         angular.forEach(places, function(place,index) {
-          console.log('place')
-          vm.free.push(place);         
+          vm.free.push(place); 
+          MapFactory.map.markers.push(MapFactory.createMarker(place, index));        
         })
-
         FreeFactory.getFree('events', function(events) {
           angular.forEach(events, function(event,index) {
-            console.log('event')
-            vm.free.push(event);      
+            vm.free.push(event);
+            MapFactory.map.markers.push(MapFactory.createMarker(event, index));              
           })          
+          console.log('done');
+          $rootScope.$broadcast('markers-complete', MapFactory.map.markers);
         })
       })
     }
 
-    $timeout(function(){
-      angular.forEach(vm.free, function(item, index) {
-        vm.markers.push(MapFactory.creatMarker(item, index))                           
-      });
-    },3000)
-
-
-    $timeout(function() {
-      init();
-    },400);  
+    init(); 
   }
 })();
-    
-
