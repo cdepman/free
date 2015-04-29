@@ -7,8 +7,9 @@ var bodyParser = require('body-parser');
 // var dir = path.resolve(__dirname + '/client');
 var app = express();
 var request = require('request');
+var port = process.env.PORT || 5000;
 
-app.set('port', (process.env.PORT || 5000));
+app.set('port', port);
 
 app.use(bodyParser.urlencoded({ extended: true}));
 app.use(bodyParser.json());
@@ -21,14 +22,14 @@ app.get('/', function(req, res, next) {
 })
 
 app.get('/places', function(req, res, next) {
-  request('http://free4allapi.herokuapp.com/places', function(err, response, body) {
+  request('http://vast-tor-2841.herokuapp.com/places', function(err, response, body) {
     var data = response.body;
     res.send(data);
   })
 });
 
 app.get('/events', function(req, res, next) {
-  request('http://free4allapi.herokuapp.com/events', function(err, response, body) {
+  request('http://vast-tor-2841.herokuapp.com/events', function(err, response, body) {
     var data = response.body;
     res.send(data);
   })
